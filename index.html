@@ -529,9 +529,24 @@
     <div class="container">
      <h2 class="section-title">Query Showcase</h2><!-- Basic Queries -->
      <div class="query-category">
-      <h3>Basic Queries</h3><!-- Query 1 -->
+      <!-- Query 1 -->
       <div class="query-block">
-      <p class="query-question">Question: How many unique customers do we have in total?</p>
+      <p class="query-question">Problem 1: In a perfect system, a customer should not have multiple
+active subscriptions at the same time. However, backend
+errors or glitches sometimes create overlapping
+subscriptions.
+
+Example Scenario :
+
+. Suppose a User Starts Basic Plan on Jan 1.
+. User upgrades to Premium on Jan 15.
+. The Glitch : System activates Premium plan but fails
+to close the Basic plan.
+
+This can lead to incorrect billing and inaccurate insights
+
+The Objective is to Identify these overlaps to ensure
+accurate financial reporting.</p>
        <div class="code-box"><span class="code-label">SQL</span>
         <pre><code class="language-sql">
 SELECT DISTINCT count(customerId) AS 'No. of Unique Customers' 
