@@ -452,8 +452,8 @@
    <section class="hero">
     <div class="container">
      <h1 id="hero-title">SQL Data Analysis Project</h1>
-     <h2 id="hero-subtitle">OTT Subscription Analytics.</h2>
-     <p id="hero-description">A self-created SQL project solving real business problems — covering basic, intermediate, and advanced SQL queries for real-world insights.</p>
+     <h2 id="hero-subtitle">Solved 15 real business problems using SQL</h2>
+     <p id="hero-description">This project simulates the role of a Data Analyst working for an OTT streaming platform. Using a custom-built relational dataset, I analyzed customer behavior, revenue trends, retention, engagement, churn, and monetization using SQL for real-world insights.</p>
      <div class="hero-tags"><span class="tag">#SQL</span> <span class="tag">#DataAnalysis</span> <span class="tag">#PortfolioProject</span>
      </div><a href="#query-showcase" class="cta-button">View Queries</a>
     </div>
@@ -462,10 +462,10 @@
     <div class="container">
      <h2 class="section-title">About the Project</h2>
      <div class="card">
-      <p>This case study simulates a subscription based OTT streaming platform - StreamBox+, similar to platforms like Netflix or Prime Video</p>
-      <p>It covers various dimensions such as Revenue performance, Customer churn, Engagement behavior, Retention patterns etc, providing comprehensive view of overall business performance.</p>
-      <p>The objective was to generate insights, strengthen SQL skills, and deepen business understanding. Every query is designed to reflect a real-world business scenario, helping to interpret patterns, trends, and relationships within the data in a practical and logical way.</p>
-     </div>
+      <p>This case study simulates a subscription based OTT streaming platform - StreamBox+, similar to platforms like Netflix or Prime Video. It was created to demonstrate how SQL can be used beyond simple data retrieval. Instead of writing isolated queries, I approached each analysis as a business problem that required a practical solution. Every query starts with a real business question and ends with an insight that can support decision-making.</p>
+      <p>The project follows an end-to-end case study approach. I explored different areas of the business, including customer lifecycle, subscription behavior, revenue performance, user engagement, payment analysis, retention, and churn. Throughout the project, I used SQL to clean, transform, analyze, and summarize data into meaningful results.</p>
+     <p>The main objective was to practice analytical thinking while improving SQL skills. Rather than focusing only on syntax, I aimed to understand what each metric means, why it matters, and how the insights could help different business teams make better decisions.</p>
+      </div>
     </div>
    </section><!-- About the Dataset -->
    <section id="about-dataset">
@@ -473,7 +473,7 @@
      <h2 class="section-title">About the Dataset</h2><!-- Dataset Overview -->
      <h3 class="subsection-title">Dataset Overview</h3>
      <div class="card">
-      <p>The analysis uses a simulated dataset, designed and structured to mirror real world OTT platform data. The dataset spans Jan 2025 - Dec 2025 and contains thousands of records across multiple tables.</p>
+      <p>The dataset used in this project was designed and generated from scratch using AI to simulate a realistic OTT subscription platform. Instead of using an existing public dataset, I created a structured database containing customers, subscriptions, payments, watch activity, plans, and cancellations to reflect real-world business scenarios.</p>
      
 </div><!-- Summary -->
     <div class="card">
@@ -489,12 +489,12 @@
      <div class="card">
       <p>The database consists of six core tables, each serving a unique function:</p>
       <ul>
-       <li><strong>Customers</strong> – Records each transaction along with order date, channel, and delivery status.</li>
-       <li><strong>Subscriptions</strong> – Links orders and products, capturing quantity, sales price, and item-level data.</li>
-       <li><strong>Payments</strong> – Contains details of all items available for sale, including price, cost, and launch date.</li>
-       <li><strong>Watch_activity</strong> – Stores customer information such as names, location, age group, etc.</li>
-       <li><strong>Cancellations</strong> – Tracks returned items, reasons, and related order links.</li>
-       <li><strong>Plans</strong> – Includes customer feedback, ratings, and review dates for purchased products.</li>
+       <li><strong>Customers</strong> – Stores basic customer information such as signup date, name etc and acts as the primary table connecting the entire database.</li>
+       <li><strong>Subscriptions</strong> – Tracks every subscription purchased by customers, including plan details, billing cycle, subscription status, and subscription duration.</li>
+       <li><strong>Payments</strong> – Contains payment records for every subscription transaction, including payment amount, payment date, and payment status.</li>
+       <li><strong>Watch_activity</strong> – Records users' viewing activity, including watch date and watch minutes, helping measure engagement and content consumption.</li>
+       <li><strong>Cancellations</strong> – Stores cancellation details, including cancellation date and reason, making it possible to analyze churn behavior and revenue impact.</li>
+       <li><strong>Plans</strong> – Contains information about available subscription plans, including plan name and monthly pricing, which is used in revenue and subscription analysis.</li>
       </ul>
      </div>
     </div>
@@ -513,10 +513,10 @@
      <h2 class="section-title">SQL Concepts Used</h2>
      <div class="card">
       <ul>
-       <li>Joins (INNER, LEFT, RIGHT)</li>
+       <li>Common Table Expressions (CTEs)</li>
        <li>GROUP BY and Aggregates Functions</li>
        <li>Sorting and Filtering (ORDER BY, WHERE)</li>
-       <li>Subqueries and CTEs</li>
+       <li>Joins (Left, Inner, Right)</li>
        <li>Window functions</li>
        <li>CASE WHEN Statements</li>
        <li>Null handling (NULLIF, ISNULL)</li>
@@ -1097,14 +1097,7 @@ ORDER BY COUNT(DISTINCT returns.ReturnID)*100/NULLIF(COUNT(DISTINCT orderdetails
       <p>Working on this dataset also improved my data cleaning and transformation skills, enhanced my ability to derive business insights from raw information, and gave me hands-on experience in writing optimized and readable SQL queries. It also improved my ability to simulate and analyze real-world datasets independently.</p>
      </div>
     </div>
-   </section><!-- Other Project -->
-   <section id="other-project">
-    <div class="container">
-     <h2 class="section-title">Related Work</h2>
-     <div class="card">
-      <p>I have also built a multi-page Power BI dashboard using the same dataset. It was shared previously on LinkedIn. You can view that project here – <a href="https://www.linkedin.com/posts/vivekraturi_boat-lifestyles-dashboard-activity-7390292880659079168-eRdR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEIbHFABWFEdRv37FEjvvgAuMQ7ofrbjdTEhttps://www.linkedin.com/posts/vivekraturi_boat-lifestyles-dashboard-activity-7390292880659079168-eRdR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEIbHFABWFEdRv37FEjvvgAuMQ7ofrbjdTE" target="_blank" rel="noopener noreferrer"><strong> Power BI Dashboard</strong></a></p>
-     </div>
-    </div>
+
    </section><!-- Connect -->
    <section id="connect">
     <div class="container">
