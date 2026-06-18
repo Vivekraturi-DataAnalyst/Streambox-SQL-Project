@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Data Analysis Project - Portfolio</title>
+  <script src="/_sdk/element_sdk.js"></script><!-- Prism.js for SQL Syntax Highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1b233a 50%, #111827 100%);
+            background-attachment: fixed;
+            color: #e2e8f0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 710px;
+            margin: 0 auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 28px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #60a5fa;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag:hover {
+            background: rgba(96, 165, 250, 0.2);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5),
+                        0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        h2.section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #f1f5f9;
+        }
+
+        h3.subsection-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 45px;
+            margin-bottom: 24px;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 32px;
+            margin: 0 auto 40px auto;
+            max-width: 710px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .card:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(96, 165, 250, 0.4);
+            box-shadow: 0 8px 32px rgba(96, 165, 250, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .card p {
+            margin-bottom: 18px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .card ul li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+
+
+        .er-diagram {
+            background: rgba(30, 41, 59, 0.5);
+            border: 2px dashed rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            padding: 35px 32px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin: 0 auto 16px auto;
+            max-width: 710px;
+        }
+
+        .er-caption {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 40px;
+            max-width: 710px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .query-block {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 28px;
+            margin: 0 auto 40px auto;
+            max-width: 710px;
+            transition: all 0.4s ease;
+            text-align: left;
+        }
+
+        .query-block:hover {
+            background: rgba(30, 41, 59, 0.75);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.25),
+                        0 8px 24px rgba(96, 165, 250, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .query-block h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #f1f5f9;
+        }
+
+        /* Query question text */
+        .query-question {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .code-box {
+            background: #0f172a;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 6px;
+            padding: 0;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-box pre {
+            margin: 0;
+            padding: 20px;
+            background: transparent !important;
+        }
+
+        .code-box code {
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Custom scrollbar styling for code boxes */
+        .code-box pre::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .code-box pre::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 4px;
+        }
+
+        .code-box pre::-webkit-scrollbar-thumb {
+            background: rgba(71, 85, 105, 0.6);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .code-box pre::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.8);
+        }
+
+        .code-label {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 0.75rem;
+            color: #60a5fa;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .dropdown-btn {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-btn span {
+            transition: transform 0.4s ease;
+            display: inline-block;
+        }
+
+        .dropdown-btn.active span {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+            transform: translateX(2px);
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.4s ease;
+            margin-top: 0;
+        }
+
+        .dropdown-content.open {
+            max-height: 1200px;
+            margin-top: 16px;
+        }
+
+        .output-box {
+            background: #0f172a;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 6px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .output-image {
+            text-align: center;
+            margin: 0;
+        }
+
+        .output-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .query-category {
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        .query-category h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: #f1f5f9;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* LinkedIn icon */
+        .linkedin-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* LinkedIn icon */
+        .linkedin-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 80px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #93c5fd;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            h2.section-title {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <main><!-- Hero Section -->
+   <section class="hero">
+    <div class="container">
+     <h1 id="hero-title">SQL Data Analysis Project</h1>
+     <h2 id="hero-subtitle">End-to-End SQL Analysis of Boat Lifestyle Data.</h2>
+     <p id="hero-description">A self-created SQL project analyzing sales, products and customers of Boat Lifestyle — covering basic, intermediate, and advanced SQL queries for real-world insights.</p>
+     <div class="hero-tags"><span class="tag">#SQL</span> <span class="tag">#DataAnalysis</span> <span class="tag">#PortfolioProject</span>
+     </div><a href="#query-showcase" class="cta-button">View Queries</a>
+    </div>
+   </section><!-- About the Project -->
+   <section id="about-project">
+    <div class="container">
+     <h2 class="section-title">About the Project</h2>
+     <div class="card">
+      <p>This project is a complete SQL-Based analysis of a simulated Boat Lifestyle e-commerce dataset.</p>
+      <p>It covers various dimensions such as sales, returns, products, customers, and reviews — providing comprehensive view of overall business performance.</p>
+      <p>The objective was to generate insights, strengthen SQL skills, and deepen business understanding. Every query is designed to reflect a real-world business scenario, helping to interpret patterns, trends, and relationships within the data in a practical and logical way.</p>
+     </div>
+    </div>
+   </section><!-- About the Dataset -->
+   <section id="about-dataset">
+    <div class="container">
+     <h2 class="section-title">About the Dataset</h2><!-- Dataset Overview -->
+     <h3 class="subsection-title">Dataset Overview</h3>
+     <div class="card">
+      <p>The dataset used in this project is entirely created by me from scratch, with AI assistance, to simulate a realistic retail and e-commerce business scenario. It is not publically available anywhere. It includes multiple interconnected tables covering different aspects of operations.</p>
+     
+</div><!-- Summary -->
+    <div class="card">
+      <ul>
+       <li>Type: Simulated/Mock business dataset.</li>
+       <li>Source: Self-created in Excel, imported into SQL Server.</li>
+       <li>Data Volume: ~15000 total rows across all tables (8,000+ in OrderDetails alone).</li>
+       <li>Time Period Covered: Q1 (January - March 2025). 3 month simulated dataset.</li>
+       <li>Domain: Business Operations – Consumer Electronics.</li>
+      </ul>
+     </div><!-- Tables -->
+     <h3 class="subsection-title">Tables</h3>
+     <div class="card">
+      <p>The database consists of six core tables, each serving a unique function:</p>
+      <ul>
+       <li><strong>Orders</strong> – Records each transaction along with order date, channel, and delivery status.</li>
+       <li><strong>OrderDetails</strong> – Links orders and products, capturing quantity, sales price, and item-level data.</li>
+       <li><strong>Products</strong> – Contains details of all items available for sale, including price, cost, and launch date.</li>
+       <li><strong>Customers</strong> – Stores customer information such as names, location, age group, etc.</li>
+       <li><strong>Returns</strong> – Tracks returned items, reasons, and related order links.</li>
+       <li><strong>Reviews</strong> – Includes customer feedback, ratings, and review dates for purchased products.</li>
+      </ul>
+     </div>
+    </div>
+   </section><!-- Entity Relationship Diagram -->
+   <section id="er-diagram">
+    <div class="container">
+     <h2 class="section-title">Entity Relationship Diagram</h2>
+     <div class="er-diagram">
+     <img src="images/ERD.png" alt="ER Diagram" class="erd-image">
+     </div>
+     <p class="er-caption">This Entity-Relationship (ER) Diagram visually represents the overall database structure used in this project. It maps how different tables — such as Orders, OrderDetails, Products, Customers, Returns, and Reviews — are connected to each other.</p>
+    </div>
+   </section><!-- SQL Concepts Used -->
+   <section id="sql-concepts">
+    <div class="container">
+     <h2 class="section-title">SQL Concepts Used</h2>
+     <div class="card">
+      <ul>
+       <li>Joins (INNER, LEFT, RIGHT)</li>
+       <li>GROUP BY and Aggregates Functions</li>
+       <li>Sorting and Filtering (ORDER BY, WHERE)</li>
+       <li>Subqueries and CTEs</li>
+       <li>Window functions</li>
+       <li>CASE WHEN Statements</li>
+       <li>Null handling (NULLIF, ISNULL)</li>
+       <li>Date and String functions</li>
+       <li>Mathematical expressions for KPIs</li>
+      </ul>
+     </div>
+    </div>
+   </section><!-- Query Showcase -->
+   <section id="query-showcase">
+    <div class="container">
+     <h2 class="section-title">Query Showcase</h2><!-- Basic Queries -->
+     <div class="query-category">
+      <h3>Basic Queries</h3><!-- Query 1 -->
+      <div class="query-block">
+      <p class="query-question">Question: How many unique customers do we have in total?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT DISTINCT count(customerId) AS 'No. of Unique Customers' 
+FROM Customers;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q1.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 2 -->
+      <div class="query-block">
+<p class="query-question">Question: What is the gender distribution of our customers?</p>
+  <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Gender,
+       Count(Customerid) AS 'No. of Customers'
+FROM customers
+GROUP BY Gender
+ORDER BY 'No. of Customers' DESC;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q2.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 3 -->
+      <div class="query-block">
+<p class="query-question">Question: What is the average age of our customers?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT round(Avg(age), 0) AS 'Average Age of Customers'
+FROM customers</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q3.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 4 -->
+      <div class="query-block">
+<p class="query-question">Question: How many unique products are listed in each subcategory?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT subcategory,
+       count(Productid) AS 'No. of Products'
+FROM products
+GROUP BY Subcategory
+ORDER BY 'No. of Products' DESC;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q2.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 5 -->
+      <div class="query-block">
+<p class="query-question">Question: Which product has the highest MRP?</p>
+      <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 1 ProductId,
+           ProductName,
+           MRP
+FROM Products
+ORDER BY MRP DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q5.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 6 -->
+      <div class="query-block">
+       <p class="query-question">Question: Which subcategory has the highest average MRP?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 1 SubCategory,
+           round(Avg(MRP), 2) AS 'Average MRP'
+FROM Products
+GROUP BY Subcategory
+ORDER BY 'Average MRP' DESC;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q6.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 7 -->
+      <div class="query-block">
+       <p class="query-question">Question: What is our total revenue for Jan, Feb, and March?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Format(Orderdate, 'MMMM') AS 'Months',
+       Sum(TotalAmount) AS 'Total Revenue'
+FROM orders
+GROUP BY Format(Orderdate, 'MMMM'),
+         Month(OrderDate)
+ORDER BY month(orderdate)</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q7.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 8 -->
+      <div class="query-block">
+      <p class="query-question">Question: How many orders were placed via each sales channel?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT OrderChannel,
+       Count(orderid) AS 'No. of orders'
+FROM orders
+GROUP BY orderchannel
+ORDER BY 'No. of orders' DESC;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q8.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 9 -->
+      <div class="query-block">
+      <p class="query-question">Question: What is the average order value per channel?</p>
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT OrderChannel,
+       Round(Avg(TotalAmount), 2) AS 'Avg order value'
+FROM orders
+GROUP BY Orderchanne;</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q9.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 10 -->
+      <div class="query-block">
+     <p class="query-question">Question: What are the 3 most common return reasons?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 3 Reason,
+           Count(returnid) 'No of Returns'
+FROM RETURNS
+GROUP BY Reason
+ORDER BY 'No of Returns' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/Q10.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Intermediate Queries -->
+     <div class="query-category">
+      <h3>Intermediate Queries</h3><!-- Query 1 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which states have the highest number of registered customers?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 1 State,
+           count(customerid) AS 'No. of customer'
+FROM customers
+GROUP BY state
+ORDER BY 'No. of customer' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/11.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 2 -->
+      <div class="query-block">
+       <p class="query-question">Question: How many customers registered in each month?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Format(RegistrationDate, 'MMM/yyyy') AS 'Registration Month',
+       Count(customerid) AS 'No. of registrations'
+FROM customers
+GROUP BY Format(RegistrationDate, 'MMM/yyyy'),
+         year(RegistrationDate),
+         month(RegistrationDate)
+ORDER BY year(RegistrationDate),
+         month(RegistrationDate)</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/12.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 3 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which product has sold the most units overall?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 1 Orderdetails.ProductID,
+           Productname,
+           Sum(Quantity) AS 'Total Quantity Sold'
+FROM OrderDetails
+INNER JOIN products ON OrderDetails.ProductID=Products.ProductId
+GROUP BY orderdetails.ProductID,
+         Products.ProductName
+ORDER BY 'Total Quantity Sold' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/13.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 4 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which subcategories have generated the highest sales revenue?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT SubCategory,
+       Sum(SalesPrice) AS 'Revenue'
+FROM OrderDetails
+INNER JOIN Products ON Orderdetails.ProductID=products.ProductId
+GROUP BY SubCategory
+ORDER BY 'Revenue' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/14.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 5 -->
+      <div class="query-block">
+      <p class="query-question">Question: How much discount did we give overall and per month?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Format(Orderdate, 'MMM-yyyy') AS 'Order Month',
+       Sum((Quantity*UnitPrice)-SalesPrice) AS 'Discount Amount'
+FROM OrderDetails
+INNER JOIN orders ON OrderDetails.OrderID=Orders.OrderID
+GROUP BY Format(Orderdate, 'MMM-yyyy'),
+         month(orderdate)
+ORDER BY month(orderdate) 
+
+--And--
+
+SELECT Sum((Quantity*UnitPrice)-SalesPrice) AS 'Total Discount Amount'
+FROM OrderDetails</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/15.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 6 -->
+      <div class="query-block">
+      <p class="query-question">Question: What is the total revenue generated by each subcategory?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT SubCategory,
+       sum(SalesPrice) AS 'Total Revenue'
+FROM OrderDetails
+INNER JOIN Products ON OrderDetails.ProductID=Products.ProductId
+GROUP BY SubCategory
+ORDER BY [Total Revenue] DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/16.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 7 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which 5 cities brought the highest revenue?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 5 ShippingCity,
+           Sum(Totalamount) AS 'Total Revenue'
+FROM orders
+GROUP BY ShippingCity
+ORDER BY [Total Revenue] DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/17.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 8 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which are the top 3 products with the highest return counts?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 3 Products.ProductId,
+           products.ProductName,
+           count(returns.returnid) AS 'No of returns'
+FROM RETURNS
+INNER JOIN orderdetails ON returns.orderID=OrderDetails.OrderID
+INNER JOIN Products ON orderdetails.ProductID=products.ProductId
+GROUP BY products.ProductId,
+         products.productName
+ORDER BY 'No of returns' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/18.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 9 -->
+      <div class="query-block">
+     <p class="query-question">Question: What is the average delivery time ?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT concat(Avg(datediff(DAY, orderdate, Deliverydate)), ' Days') 
+AS 'Average Delivery Time'
+FROM orders</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/19.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 10 -->
+      <div class="query-block">
+     <p class="query-question">Question: Which products have the most positive reviews?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT Top 3 reviews.ProductID,
+           products.ProductName,
+           Count(*) AS 'No. of Positive Reviews'
+FROM Reviews
+INNER JOIN Products ON reviews.ProductID=products.ProductId
+WHERE ReviewTag IN('Excellent',
+                   'Good Quality',
+                   'Loved it',
+                   'Highly Recommend')
+GROUP BY reviews.ProductID,
+         products.productname
+ORDER BY 'No. of Positive Reviews' DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/20.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Advanced Queries -->
+     <div class="query-category">
+      <h3>Advanced Queries</h3><!-- Query 1 -->
+      <div class="query-block">
+     <p class="query-question">Question: Which customer age group contributes to the most orders?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+WITH AgeGroups AS
+  (SELECT Customerid,
+          CASE
+              WHEN age<=25 THEN '16-25'
+              WHEN age BETWEEN 26 AND 35 THEN '26-35'
+              WHEN age BETWEEN 36 AND 45 THEN '36-45'
+              WHEN age BETWEEN 46 AND 55 THEN '46-55'
+              ELSE '55+'
+          END AS Age
+   FROM customers)
+SELECT agegroups.Age,
+       Count(orders.CustomerId) AS 'No. of orders'
+FROM AgeGroups
+INNER JOIN orders ON Agegroups.CustomerId=orders.CustomerId
+GROUP BY AgeGroups.Age
+ORDER BY [No. of orders] DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/21.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 2 -->
+      <div class="query-block">
+       <p class="query-question">Question: Which state and age group combination brings the highest revenue?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+WITH AgeGroups AS
+  (SELECT Customerid,
+          CASE
+              WHEN age <= 25 THEN '16-25'
+              WHEN age BETWEEN 26 AND 35 THEN '25-35'
+              WHEN age BETWEEN 36 AND 45 THEN '35-45'
+              WHEN age BETWEEN 46 AND 55 THEN '45-55'
+              ELSE '55+'
+          END AS Age
+   FROM customers)
+SELECT top 3 ShippingState,
+           Age,
+           sum(totalamount) AS 'Total Revenue'
+FROM orders
+INNER JOIN AgeGroups ON orders.CustomerId=AgeGroups.CustomerId
+GROUP BY ShippingState,
+         Age
+ORDER BY [Total Revenue] DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/22.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 3 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which are the Top 3 newly launched products (in the last 30 days) with the highest total sales revenue?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+ SELECT Top 3 products.Productid,
+           products.ProductName,
+           LaunchDate,
+           sum(Orderdetails.SalesPrice) AS 'Revenue'
+FROM OrderDetails
+RIGHT JOIN products ON OrderDetails.ProductID=products.ProductId
+WHERE LaunchDate>='2025-3-1'
+GROUP BY Products.ProductId,
+         products.ProductName,
+         LaunchDate
+ORDER BY Revenue DESC</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/23.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 4 -->
+      <div class="query-block">
+      <p class="query-question">Question: What is our gross profit and profit margin overall and per month?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT sum(salesprice) AS 'TotalRevenue',
+       sum(costprice*quantity) AS 'Total cost',
+       (sum(salesprice)-sum(costprice*quantity)) AS 'Overall Gross Profit',
+       concat(Round(((sum(salesprice)-sum(costprice*quantity))*100)/nullif(sum(salesprice), 0), 2), '%') AS 'Profit Margin'
+FROM orderdetails
+INNER JOIN products ON orderdetails.productid=products.productid 
+
+---AND---
+
+SELECT format(orders.orderdate, 'MMMM-yyyy') AS 'Months',
+       sum(salesprice) AS 'TotalRevenue',
+       sum(costprice*quantity) AS 'Total cost',
+       (sum(salesprice)-sum(costprice*quantity)) AS 'Gross Profit',
+       concat(Round(((sum(salesprice)-sum(costprice*quantity))*100)/nullif(sum(salesprice), 0), 2), '%') AS 'Profit Margin'
+FROM orderdetails
+INNER JOIN products ON orderdetails.productid=products.productid
+INNER JOIN Orders ON OrderDetails.OrderID=Orders.OrderID
+GROUP BY format(orders.orderdate, 'MMMM-yyyy'),
+         month(orderdate)
+ORDER BY month(orderdate)</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/24.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 5 -->
+      <div class="query-block">
+      <p class="query-question">Question: Which channels (App/Website/Flipkart) generate higher profit margins?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT OrderChannel,
+       Format(((sum(salesprice)-sum(costprice*quantity)))/nullif(sum(salesprice),0),'P2') as 'Profit Margin'
+FROM orderdetails
+INNER JOIN products ON orderdetails.productid=products.productid
+INNER JOIN Orders ON OrderDetails.OrderID=Orders.OrderID
+GROUP BY OrderChannel</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/25.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+      </div><!-- Query 6 -->
+      <div class="query-block">
+       <p class="query-question">Question: What is the return rate of each product compared to its total number of orders?</p>
+
+       <div class="code-box"><span class="code-label">SQL</span>
+        <pre><code class="language-sql">
+SELECT products.ProductName,
+       COUNT(DISTINCT orderdetails.orderid) AS [Total Orders],
+       COUNT(DISTINCT returns.ReturnID) AS [Total Returns],
+       concat(COUNT(DISTINCT returns.ReturnID)*100/NULLIF(COUNT(DISTINCT orderdetails.OrderID),0),'%') AS 'Return Rate (%)'
+FROM orderdetails
+INNER JOIN Products ON orderdetails.ProductID = products.ProductID
+LEFT JOIN RETURNS ON orderdetails.OrderID = returns.OrderID
+GROUP BY products.ProductName
+ORDER BY COUNT(DISTINCT returns.ReturnID)*100/NULLIF(COUNT(DISTINCT orderdetails.OrderID),0) DESC;
+
+-- NOTE: Used ORDER BY COUNT(DISTINCT returns.ReturnID)*100/NULLIF(COUNT(DISTINCT orderdetails.OrderID),0) DESC
+-- instead of ORDER BY [Return Rate (%)] ; because CONCAT converts numeric values to text, 
+-- which prevents correct numerical sorting.</code></pre>
+       </div><button class="dropdown-btn" onclick="toggleDropdown(this)"> View Output <span>▼</span> </button>
+       <div class="dropdown-content">
+        <div class="output-box">
+         <div class="output-image"><img src="images/26.png" alt="Query Output" onerror="this.style.display='none';">
+         </div>
+        </div>
+       </div>
+
+     </div><!-- Closing Statement - Standalone text without section styling -->
+     <div style="text-align: center; margin: 60px auto 40px auto; max-width: 710px;">
+      <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">With these queries, the dataset was explored from multiple perspectives, ensuring a well-rounded analysis. Each query helped uncover meaningful and valuable business insights.</p>
+     </div>
+    </div>
+   </section><!-- Challenges Faced -->
+   <section id="challenges">
+    <div class="container">
+     <h2 class="section-title">Challenges Faced</h2>
+     <div class="card">
+      <ul>
+       <li>Creating and managing large dataset with around 15,000 records.</li>
+       <li>Maintaining relationships between tables</li>
+       <li>Cleaning and normalizing the dataset</li>
+       <li>Handling missing and inconsistent values.</li>
+       <li>Designing efficient SQL joins and subqueries.</li>
+       <li>Formatting queries for readability</li>
+       <li>Ensuring query accuracy and performance optimization.</li>
+      </ul>
+     </div>
+    </div>
+   </section><!-- Learnings -->
+   <section id="learnings">
+    <div class="container">
+     <h2 class="section-title">Learnings</h2>
+     <div class="card">
+      <p>This project helped me strengthen my understanding of SQL concepts such as joins, subqueries, and aggregation functions. I learned how to design ER diagrams, establish relationships between tables, and structure data for meaningful analysis.</p>
+      <p>Working on this dataset also improved my data cleaning and transformation skills, enhanced my ability to derive business insights from raw information, and gave me hands-on experience in writing optimized and readable SQL queries. It also improved my ability to simulate and analyze real-world datasets independently.</p>
+     </div>
+    </div>
+   </section><!-- Other Project -->
+   <section id="other-project">
+    <div class="container">
+     <h2 class="section-title">Related Work</h2>
+     <div class="card">
+      <p>I have also built a multi-page Power BI dashboard using the same dataset. It was shared previously on LinkedIn. You can view that project here – <a href="https://www.linkedin.com/posts/vivekraturi_boat-lifestyles-dashboard-activity-7390292880659079168-eRdR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEIbHFABWFEdRv37FEjvvgAuMQ7ofrbjdTEhttps://www.linkedin.com/posts/vivekraturi_boat-lifestyles-dashboard-activity-7390292880659079168-eRdR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEIbHFABWFEdRv37FEjvvgAuMQ7ofrbjdTE" target="_blank" rel="noopener noreferrer"><strong> Power BI Dashboard</strong></a></p>
+     </div>
+    </div>
+   </section><!-- Connect -->
+   <section id="connect">
+    <div class="container">
+     <h2 class="section-title">Connect</h2>
+     <div class="card">
+      <p>Thanks for checking out my project!</p>
+      <p>This project was a great learning experience, and I'm excited to keep improving my analytical skills. If you found this interesting or have suggestions, feel free to connect with me on -</p>
+      <p>🔗 
+       <svg class="linkedin-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#60a5fa" />
+       </svg><a href="http://www.linkedin.com/in/vivekraturi" target="_blank" rel="noopener noreferrer"><strong> LinkedIn</strong></a></p>
+      <p>I'd love to exchange ideas and feedback.</p>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer>
+   <div class="container">
+    <p>Created by Vivek Raturi</p>
+   </div>
+  </footer>
+  <script>
+        function toggleDropdown(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('span');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                button.classList.remove('active');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('open');
+                button.classList.add('active');
+                arrow.textContent = '▲';
+            }
+        }
+
+        const defaultConfig = {
+            hero_title: "SQL Data Analysis Project",
+            hero_subtitle: "End-to-End SQL Analysis of Boat Lifestyle Data.",
+            linkedin_link: "https://linkedin.com/in/yourprofile",
+            email_address: "your.email@example.com",
+            powerbi_link: "https://..."
+        };
+
+        async function onConfigChange(config) {
+            const titleEl = document.getElementById('hero-title');
+            if (titleEl) {
+                titleEl.textContent = config.hero_title || defaultConfig.hero_title;
+            }
+
+            const subtitleEl = document.getElementById('hero-subtitle');
+            if (subtitleEl) {
+                subtitleEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            const linkedinEl = document.getElementById('linkedin-link');
+            if (linkedinEl) {
+                const linkedinUrl = config.linkedin_link || defaultConfig.linkedin_link;
+                linkedinEl.href = linkedinUrl;
+                linkedinEl.textContent = linkedinUrl;
+            }
+
+            const emailEl = document.getElementById('email-address');
+            if (emailEl) {
+                emailEl.textContent = config.email_address || defaultConfig.email_address;
+            }
+
+            const powerbiEl = document.getElementById('powerbi-link');
+            if (powerbiEl) {
+                const powerbiUrl = config.powerbi_link || defaultConfig.powerbi_link;
+                powerbiEl.href = powerbiUrl;
+                powerbiEl.textContent = powerbiUrl;
+            }
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["linkedin_link", config.linkedin_link || defaultConfig.linkedin_link],
+                ["email_address", config.email_address || defaultConfig.email_address],
+                ["powerbi_link", config.powerbi_link || defaultConfig.powerbi_link]
+            ]);
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99be44df311e338a',t:'MTc2MjcwMTM2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
