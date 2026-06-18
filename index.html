@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SQL Data Analysis Project - Portfolio</title>
+  <title>SQL Data Analysis Project</title>
   <script src="/_sdk/element_sdk.js"></script><!-- Prism.js for SQL Syntax Highlighting -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -452,8 +452,8 @@
    <section class="hero">
     <div class="container">
      <h1 id="hero-title">SQL Data Analysis Project</h1>
-     <h2 id="hero-subtitle">End-to-End SQL Analysis of Boat Lifestyle Data.</h2>
-     <p id="hero-description">A self-created SQL project analyzing sales, products and customers of Boat Lifestyle — covering basic, intermediate, and advanced SQL queries for real-world insights.</p>
+     <h2 id="hero-subtitle">OTT Subscription Analytics.</h2>
+     <p id="hero-description">A self-created SQL project solving real business problems — covering basic, intermediate, and advanced SQL queries for real-world insights.</p>
      <div class="hero-tags"><span class="tag">#SQL</span> <span class="tag">#DataAnalysis</span> <span class="tag">#PortfolioProject</span>
      </div><a href="#query-showcase" class="cta-button">View Queries</a>
     </div>
@@ -462,8 +462,8 @@
     <div class="container">
      <h2 class="section-title">About the Project</h2>
      <div class="card">
-      <p>This project is a complete SQL-Based analysis of a simulated Boat Lifestyle e-commerce dataset.</p>
-      <p>It covers various dimensions such as sales, returns, products, customers, and reviews — providing comprehensive view of overall business performance.</p>
+      <p>This case study simulates a subscription based OTT streaming platform - StreamBox+, similar to platforms like Netflix or Prime Video</p>
+      <p>It covers various dimensions such as Revenue performance, Customer churn, Engagement behavior, Retention patterns etc, providing comprehensive view of overall business performance.</p>
       <p>The objective was to generate insights, strengthen SQL skills, and deepen business understanding. Every query is designed to reflect a real-world business scenario, helping to interpret patterns, trends, and relationships within the data in a practical and logical way.</p>
      </div>
     </div>
@@ -473,28 +473,28 @@
      <h2 class="section-title">About the Dataset</h2><!-- Dataset Overview -->
      <h3 class="subsection-title">Dataset Overview</h3>
      <div class="card">
-      <p>The dataset used in this project is entirely created by me from scratch, with AI assistance, to simulate a realistic retail and e-commerce business scenario. It is not publically available anywhere. It includes multiple interconnected tables covering different aspects of operations.</p>
+      <p>The analysis uses a simulated dataset, designed and structured to mirror real world OTT platform data. The dataset spans Jan 2025 - Dec 2025 and contains thousands of records across multiple tables.</p>
      
 </div><!-- Summary -->
     <div class="card">
       <ul>
        <li>Type: Simulated/Mock business dataset.</li>
        <li>Source: Self-created in Excel, imported into SQL Server.</li>
-       <li>Data Volume: ~15000 total rows across all tables (8,000+ in OrderDetails alone).</li>
-       <li>Time Period Covered: Q1 (January - March 2025). 3 month simulated dataset.</li>
-       <li>Domain: Business Operations – Consumer Electronics.</li>
+       <li>Data Volume: ~15000 total rows across all tables.</li>
+       <li>Time Period Covered: January - December 2025). 1 year simulated dataset.</li>
+       <li>Domain: Business Operations – OTT platform.</li>
       </ul>
      </div><!-- Tables -->
      <h3 class="subsection-title">Tables</h3>
      <div class="card">
       <p>The database consists of six core tables, each serving a unique function:</p>
       <ul>
-       <li><strong>Orders</strong> – Records each transaction along with order date, channel, and delivery status.</li>
-       <li><strong>OrderDetails</strong> – Links orders and products, capturing quantity, sales price, and item-level data.</li>
-       <li><strong>Products</strong> – Contains details of all items available for sale, including price, cost, and launch date.</li>
-       <li><strong>Customers</strong> – Stores customer information such as names, location, age group, etc.</li>
-       <li><strong>Returns</strong> – Tracks returned items, reasons, and related order links.</li>
-       <li><strong>Reviews</strong> – Includes customer feedback, ratings, and review dates for purchased products.</li>
+       <li><strong>Customers</strong> – Records each transaction along with order date, channel, and delivery status.</li>
+       <li><strong>Subscriptions</strong> – Links orders and products, capturing quantity, sales price, and item-level data.</li>
+       <li><strong>Payments</strong> – Contains details of all items available for sale, including price, cost, and launch date.</li>
+       <li><strong>Watch_activity</strong> – Stores customer information such as names, location, age group, etc.</li>
+       <li><strong>Cancellations</strong> – Tracks returned items, reasons, and related order links.</li>
+       <li><strong>Plans</strong> – Includes customer feedback, ratings, and review dates for purchased products.</li>
       </ul>
      </div>
     </div>
@@ -505,7 +505,7 @@
      <div class="er-diagram">
      <img src="images/ERD.png" alt="ER Diagram" class="erd-image">
      </div>
-     <p class="er-caption">This Entity-Relationship (ER) Diagram visually represents the overall database structure used in this project. It maps how different tables — such as Orders, OrderDetails, Products, Customers, Returns, and Reviews — are connected to each other.</p>
+     <p class="er-caption">This Entity-Relationship (ER) Diagram visually represents the overall database structure used in this project. It maps how different tables — such as Customers, Subscriptions, Payments, Watch_activity, Cancellation, and Plans — are connected to each other.</p>
     </div>
    </section><!-- SQL Concepts Used -->
    <section id="sql-concepts">
@@ -521,7 +521,6 @@
        <li>CASE WHEN Statements</li>
        <li>Null handling (NULLIF, ISNULL)</li>
        <li>Date and String functions</li>
-       <li>Mathematical expressions for KPIs</li>
       </ul>
      </div>
     </div>
